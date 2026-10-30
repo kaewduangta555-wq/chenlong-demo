@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เฉินหลง ข้าวต้มเงินล้าน Demo</title>
+<meta name="description" content="ข้าวต้มโต้รุ่ง พุทธมณฑลสาย 4 เปิดทุกวัน 16:00–03:00 เมนูกว่า 200 รายการ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chonburi&family=Anuphan:wght@400;500;600;700&family=Mali:wght@500;600&display=swap">
+<style>
+/* Layout: late-night khao tom shop — red signboard hero, menu as a long printed board, order slip that follows you */
+:root{
+  --paper:#FFFDF8;
+  --paper-2:#FBF1E6;
+  --ink:#2A1512;
+  --ink-soft:#6E4F49;
+  --line:#EAD9CC;
+  --red:#B5211D;
+  --red-deep:#7E1210;
+  --on-red:#FFF6EC;
+  --mustard:#F2C230;
+  --leaf:#B9E05A;
+  --leaf-ink:#2C3A06;
+  --good:#1E8A4C;
+  --bad:#B5211D;
+  --shadow:0 10px 30px -12px rgba(94,20,14,.25);
+  --f-display:"Chonburi","Anuphan",serif;
+  --f-body:"Anuphan","Leelawadee UI","Tahoma",sans-serif;
+  --f-hand:"Mali","Anuphan",cursive;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#1A0F0E;--paper-2:#24130F;--ink:#F7E9DD;--ink-soft:#C3A79B;--line:#3D2620;
+  --red:#E0473B;--red-deep:#5A0E0B;--on-red:#FFF1E4;--mustard:#F4C84A;--leaf:#B9E05A;--leaf-ink:#22300A;
+  --good:#5BD08A;--bad:#FF7A6E;--shadow:0 10px 30px -12px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1A0F0E;--paper-2:#24130F;--ink:#F7E9DD;--ink-soft:#C3A79B;--line:#3D2620;
+  --red:#E0473B;--red-deep:#5A0E0B;--on-red:#FFF1E4;--mustard:#F4C84A;--leaf:#B9E05A;--leaf-ink:#22300A;
+  --good:#5BD08A;--bad:#FF7A6E;--shadow:0 10px 30px -12px rgba(0,0,0,.6);color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--mustard);outline-offset:2px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* demo ribbon */
+.demo{background:var(--ink);color:var(--paper);font-size:13px;text-align:center;padding-block:6px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--red);color:var(--on-red);box-shadow:0 2px 0 var(--red-deep)}
+header.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;min-width:0}
+.brand b{font-family:var(--f-display);font-size:22px;font-weight:400;letter-spacing:.5px;white-space:nowrap}
+.brand span{font-size:13px;opacity:.85;white-space:nowrap}
+nav.links{margin-left:auto;display:flex;gap:4px}
+nav.links a{text-decoration:none;padding:6px 12px;border-radius:999px;font-weight:500;font-size:15px}
+nav.links a:hover{background:rgba(255,255,255,.14)}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:var(--on-red);color:var(--red-deep);padding:5px 12px;border-radius:999px;white-space:nowrap}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px rgba(30,138,76,.2)}
+.status.closed i{background:#999;box-shadow:none}
+@media (max-width:760px){nav.links{display:none}.status{margin-left:auto}.brand span{display:none}}
+
+/* hero */
+.hero{background:var(--red);color:var(--on-red);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background:
+  radial-gradient(circle at 9px -2px,transparent 10px,var(--paper) 11px) 0 0/18px 18px repeat-x}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:40px;padding-block:56px 72px;align-items:center}
+.eyebrow{font-family:var(--f-hand);font-size:17px;color:var(--mustard)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,8vw,96px);line-height:1.12;margin-top:6px}
+.hero h1 small{display:block;font-size:.42em;line-height:1.3;margin-top:10px;color:var(--mustard)}
+.hero p.lead{font-size:18px;max-width:34em;margin:20px 0 0;opacity:.95}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;text-decoration:none;font-weight:700;font-size:16px;padding:12px 22px;border-radius:12px}
+.btn.solid{background:var(--mustard);color:#2A1512;box-shadow:0 4px 0 #B88E10}
+.btn.solid:active{transform:translateY(2px);box-shadow:0 2px 0 #B88E10}
+.btn.ghost{background:transparent;color:var(--on-red);border:2px solid rgba(255,246,236,.55)}
+.btn.ghost:hover{border-color:var(--on-red)}
+
+.clock{background:var(--paper);color:var(--ink);border-radius:20px;padding:26px;box-shadow:0 18px 40px -16px rgba(0,0,0,.45);transform:rotate(1.2deg)}
+.clock .label{font-size:13px;letter-spacing:.06em;color:var(--ink-soft);font-weight:600}
+.clock .hours{display:flex;align-items:center;gap:14px;font-family:var(--f-display);font-size:clamp(30px,4.2vw,44px);color:var(--red);line-height:1.2;margin:6px 0 2px}
+.clock .hours em{font-style:normal;font-family:var(--f-body);font-size:15px;color:var(--ink-soft);display:block;font-weight:500}
+.clock .arrow{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 11px);min-width:20px}
+.bar{position:relative;height:10px;border-radius:99px;background:var(--paper-2);margin:16px 0 6px;overflow:hidden}
+.bar b{position:absolute;inset:0 auto 0 0;background:var(--red);border-radius:99px}
+.bar-legend{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft)}
+.clock .now{margin-top:14px;font-weight:600}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.facts div{background:var(--paper-2);border-radius:12px;padding:10px 12px;font-size:14px}
+.facts strong{display:block;font-size:17px}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-block:40px 60px}.clock{transform:none}}
+
+/* sections */
+section{padding-block:64px}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.sec-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(30px,4.4vw,44px);color:var(--red);line-height:1.25}
+.sec-head p{margin:6px 0 0;color:var(--ink-soft);max-width:36em}
+.hand{font-family:var(--f-hand)}
+
+/* must try */
+.must{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.dish{position:relative;border-radius:18px;padding:22px 18px 18px;min-height:168px;display:flex;flex-direction:column;justify-content:flex-end;color:#2A1512;overflow:hidden}
+.dish:nth-child(5n+1){background:#FFD7C2}
+.dish:nth-child(5n+2){background:#FBE38A}
+.dish:nth-child(5n+3){background:#CFE9A0}
+.dish:nth-child(5n+4){background:#F6C6DA}
+.dish:nth-child(5n+5){background:#BFE2F0}
+.dish .glyph{position:absolute;top:-6px;right:-4px;font-family:var(--f-display);font-size:92px;line-height:1;opacity:.13;pointer-events:none}
+.dish h3{font-size:20px;font-weight:700;line-height:1.3}
+.dish p{margin:2px 0 0;font-size:13px;opacity:.75}
+.stamp{position:absolute;top:14px;left:14px;background:var(--red);color:#FFF6EC;font-family:var(--f-hand);font-weight:600;font-size:17px;padding:2px 12px;border-radius:999px;transform:rotate(-8deg);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.dish .add{margin-top:12px;align-self:flex-start;background:rgba(42,21,18,.9);color:#FFF6EC;border:0;border-radius:10px;padding:6px 12px;font-size:14px;font-weight:600;cursor:pointer}
+.dish .add:hover{background:#2A1512}
+
+/* menu */
+#menu{background:var(--paper-2)}
+.toolbar{position:sticky;top:52px;z-index:30;background:var(--paper-2);padding-block:10px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 15px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.tab[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.search{display:flex;gap:10px;align-items:center;margin-top:10px}
+.search input{flex:1;min-width:0;font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--red)}
+.count{font-size:14px;color:var(--ink-soft);white-space:nowrap}
+
+.cat{margin-top:36px}
+.cat h3{font-family:var(--f-display);font-weight:400;font-size:28px;color:var(--ink);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.cat h3 span{font-family:var(--f-body);font-size:14px;color:var(--ink-soft);font-weight:500}
+.cat .note{margin:8px 0 0;display:inline-block;background:var(--leaf);color:var(--leaf-ink);font-size:14px;padding:4px 12px;border-radius:10px;font-weight:500}
+.sub{margin:22px 0 4px;font-weight:700;font-size:15px;color:var(--red);letter-spacing:.02em}
+.items{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;margin-top:10px}
+@media (max-width:760px){.items{grid-template-columns:1fr}}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.item .nm{min-width:0}
+.item .th{font-weight:600;font-size:17px;line-height:1.35}
+.item .en{font-size:13px;color:var(--ink-soft);line-height:1.35}
+.item .pr{font-weight:700;color:var(--red);font-size:17px;text-align:right}
+.item .pr small{display:block;font-size:11px;font-weight:500;color:var(--ink-soft)}
+.plus{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--red);background:transparent;color:var(--red);font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;position:relative}
+.plus:hover{background:var(--red);color:var(--on-red)}
+.plus .q{position:absolute;top:-8px;right:-8px;background:var(--mustard);color:#2A1512;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+.empty{padding:40px 0;text-align:center;color:var(--ink-soft)}
+mark{background:var(--mustard);color:#2A1512;border-radius:3px;padding:0 1px}
+
+/* specials */
+.specials{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:860px){.specials{grid-template-columns:1fr}}
+.panel{border-radius:22px;padding:28px;position:relative;overflow:hidden}
+.panel.fish{background:var(--red);color:var(--on-red)}
+.panel.beer{background:var(--mustard);color:#2A1512}
+.panel h3{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.25}
+.panel p{margin:8px 0 0}
+.fishes{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.fishes div{background:rgba(255,255,255,.14);border-radius:14px;padding:10px 16px}
+.fishes strong{font-size:22px;display:block;font-family:var(--f-display);font-weight:400}
+.styles{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.styles span{border:1.5px solid rgba(255,246,236,.5);border-radius:999px;padding:4px 12px;font-size:14px}
+.tower{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;align-items:end}
+.tower div{background:#FFF6EC;border-radius:14px;padding:12px;text-align:center}
+.tower .glass{margin:0 auto 8px;background:linear-gradient(#FFF6EC 0 14%,#E8A317 14%);border:2px solid #2A1512;border-radius:4px 4px 8px 8px}
+.tower strong{display:block;font-size:24px;font-family:var(--f-display);font-weight:400}
+.tower span{font-size:13px}
+
+/* visit */
+.visit{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+@media (max-width:860px){.visit{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:24px}
+.card h3{font-size:20px;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.row:last-child{border-bottom:0}
+.row.today{font-weight:700;color:var(--red)}
+.contact{display:grid;gap:12px}
+.ci{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ci .k{font-size:13px;color:var(--ink-soft);width:72px;flex:none}
+.ci .v{font-weight:600;font-size:17px;min-width:0;overflow-wrap:anywhere;user-select:all}
+.copy{margin-left:auto;border:1.5px solid var(--line);background:var(--paper-2);border-radius:8px;padding:4px 10px;font-size:13px;cursor:pointer}
+.copy:hover{border-color:var(--red)}
+.mapbtn{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;background:var(--ink);color:var(--paper);text-decoration:none;padding:16px 18px;border-radius:14px;font-weight:600}
+.svc{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.svc span{background:var(--paper-2);border-radius:999px;padding:4px 12px;font-size:14px}
+
+footer{background:var(--ink);color:var(--paper);padding-block:36px 120px;font-size:14px}
+footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
+footer b{font-family:var(--f-display);font-weight:400;font-size:20px}
+
+/* order slip */
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border:0;border-radius:16px;padding:12px 18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s}
+.fab .n{background:var(--mustard);color:#2A1512;border-radius:8px;padding:0 8px}
+.fab.bump{transform:scale(1.07)}
+.scrim{position:fixed;inset:0;background:rgba(20,8,6,.45);z-index:60}
+.slip{position:fixed;z-index:61;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(400px,calc(100vw - 32px));max-height:calc(100vh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;background:#FFFCF2;color:#2A1512;border-radius:6px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  background-image:repeating-linear-gradient(transparent 0 31px,#E9DCC6 31px 32px);background-position:0 8px}
+.slip::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px;background:radial-gradient(circle at 6px 8px,#FFFCF2 6px,transparent 6.5px) 0 0/12px 8px repeat-x}
+.slip-h{padding:18px 20px 8px;border-bottom:2px solid #2A1512;display:flex;justify-content:space-between;align-items:start;gap:12px}
+.slip-h h3{font-family:var(--f-display);font-weight:400;font-size:22px;color:#B5211D}
+.slip-h p{margin:0;font-size:13px;color:#6E4F49}
+.x{border:0;background:transparent;font-size:24px;cursor:pointer;line-height:1;color:#2A1512}
+.slip-b{overflow:auto;padding:4px 20px;flex:1}
+.ln{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:6px 0;font-family:var(--f-hand);font-size:16px}
+.ln .t{min-width:0}
+.qty{display:flex;align-items:center;gap:6px;font-family:var(--f-body)}
+.qty button{width:26px;height:26px;border-radius:7px;border:1.5px solid #2A1512;background:transparent;cursor:pointer;color:#2A1512;line-height:1}
+.slip-f{padding:12px 20px 18px;border-top:2px solid #2A1512}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:20px}
+.split{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;margin-top:6px;color:#6E4F49}
+.split select{font:inherit;border:1.5px solid #D9C8B0;border-radius:8px;padding:2px 6px;background:#FFFCF2;color:#2A1512}
+.slip-f .acts{display:flex;gap:10px;margin-top:14px}
+.slip-f .acts button{flex:1;border-radius:10px;padding:10px;font-weight:700;cursor:pointer;border:1.5px solid #2A1512;background:transparent;color:#2A1512}
+.slip-f .acts .go{background:#B5211D;border-color:#B5211D;color:#FFF6EC}
+.slip-empty{padding:30px 0;text-align:center;font-family:var(--f-hand);color:#6E4F49}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;z-index:70;font-size:14px;box-shadow:var(--shadow)}
+</style>
+</head>
+<body>
+
+<div class="demo"><div class="wrap">ตัวอย่างเว็บไซต์ (Demo) จัดทำเพื่อนำเสนอให้ร้านพิจารณา ยังไม่ใช่เว็บไซต์ทางการของร้าน · ข้อมูลเมนูจากภาพเมนูของร้าน (ต.ค. 2569)</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>เฉินหลง</b><span>ข้าวต้มเงินล้าน · พุทธมณฑลสาย 4</span></a>
+    <nav class="links" aria-label="หลัก">
+      <a href="#must">เมนูแนะนำ</a><a href="#menu">เมนูทั้งหมด</a><a href="#visit">เวลา & ที่ตั้ง</a>
+    </nav>
+    <span class="status" id="status"><i></i><span>กำลังเช็คเวลา…</span></span>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">ข้าวต้มโต้รุ่ง · พุทธมณฑลสาย 4</div>
+      <h1>เฉินหลง<small>ข้าวต้มเงินล้าน</small></h1>
+      <p class="lead">กับข้าวกว่า 200 อย่าง ตั้งแต่ไข่ตุ๋น 50 บาท ไปจนถึงปลากะพงทอดกรอบทั้งตัว ยำแซ่บ ผัดทะเล ต้มยำหม้อไฟ และเบียร์สดทาวเวอร์ เปิดทุกวันตั้งแต่ 4 โมงเย็นถึงตี 3</p>
+      <div class="cta">
+        <a class="btn solid" href="#menu">ดูเมนูทั้งหมด</a>
+        <a class="btn ghost" href="tel:028143136">โทรจองโต๊ะ 02-814-3136</a>
+      </div>
+    </div>
+    <aside class="clock" aria-label="เวลาเปิดร้าน">
+      <div class="label">เปิดทุกวัน ไม่มีวันหยุด</div>
+      <div class="hours num"><div>16:00<em>4 โมงเย็น</em></div><span class="arrow"></span><div>03:00<em>ตี 3</em></div></div>
+      <div class="bar" aria-hidden="true"><b id="bar" style="width:0"></b></div>
+      <div class="bar-legend num"><span>16:00</span><span>เที่ยงคืน</span><span>03:00</span></div>
+      <div class="now" id="nowline">&nbsp;</div>
+      <div class="facts">
+        <div><strong class="num">฿1–200</strong>ต่อคน โดยประมาณ</div>
+        <div><strong>3 แบบ</strong>นั่งร้าน · กลับบ้าน · ส่ง</div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section id="must">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>ต้องลองให้ได้เลย!</h2>
+        <p>จานที่ร้านยกให้เป็นตัวเด่น มาครั้งแรกเริ่มจากตรงนี้ได้เลย กด “ใส่ใบสั่ง” เพื่อจดเมนูไว้ก่อนสั่งกับพนักงาน</p>
+      </div>
+    </div>
+    <div class="must" id="mustGrid"></div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2>เมนูทั้งหมด</h2>
+        <p>ราคาเป็นบาท ตามเมนูของร้าน เลือกหมวดหรือพิมพ์ชื่ออาหารเพื่อค้นหา</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <div class="tabs" id="tabs" role="toolbar" aria-label="หมวดเมนู"></div>
+      <div class="search">
+        <input id="q" type="search" placeholder="ค้นหา เช่น กะเพรา, ไข่เค็ม, กุ้ง" autocomplete="off" aria-label="ค้นหาเมนู">
+        <span class="count num" id="count"></span>
+      </div>
+    </div>
+    <div id="board"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap specials">
+    <div class="panel fish">
+      <div class="eyebrow">ปลาเป็นตัว · มีปลาประจำวัน</div>
+      <h3>ปลากะพงเฉินหลง</h3>
+      <p>ปลากะพงทอดกรอบทั้งตัว ราดด้วยน้ำซุปสูตรพิเศษของร้าน</p>
+      <div class="fishes">
+        <div><strong class="num">350.-</strong>ปลากะพง</div>
+        <div><strong class="num">350.-</strong>ปลาทับทิม</div>
+      </div>
+      <div class="styles"><span>ทอดน้ำปลา</span><span>ทอดกระเทียม</span><span>นึ่งมะนาว</span><span>นึ่งซีอิ๊ว</span><span>ราดพริก / สามรส</span></div>
+      <p style="font-size:14px;opacity:.85;margin-top:14px">ปลาเก๋า ปลาค้าง สอบถามพนักงานได้เลย</p>
+    </div>
+    <div class="panel beer">
+      <div class="eyebrow" style="color:#7E1210">เบียร์สดตะวันแดง</div>
+      <h3>Lager / Rosé</h3>
+      <p>มาเป็นแก๊งค์ สั่งทาวเวอร์คุ้มกว่า</p>
+      <div class="tower num">
+        <div><div class="glass" style="width:26px;height:36px"></div><strong>79.-</strong><span>แก้ว 0.3 ลิตร</span></div>
+        <div><div class="glass" style="width:38px;height:52px"></div><strong>199.-</strong><span>เหยือก 1 ลิตร</span></div>
+        <div><div class="glass" style="width:30px;height:76px;border-radius:14px 14px 6px 6px"></div><strong>599.-</strong><span>ทาวเวอร์ 3 ลิตร</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>เวลาเปิด & ที่ตั้ง</h2><p>ริมถนนพุทธมณฑลสาย 4 ใกล้ซอยหมู่บ้านบางกอกเฮ้าส์</p></div></div>
+    <div class="visit">
+      <div class="card">
+        <h3>ติดต่อร้าน</h3>
+        <div class="contact">
+          <div class="ci"><span class="k">โทร</span><span class="v num">02-814-3136</span><button class="copy" data-copy="02-814-3136">คัดลอก</button></div>
+          <div class="ci"><span class="k">LINE</span><span class="v">@chenlongsai4</span><button class="copy" data-copy="@chenlongsai4">คัดลอก</button></div>
+          <div class="ci"><span class="k">TikTok</span><span class="v">@chenlongsai4</span></div>
+          <div class="ci"><span class="k">Facebook</span><a class="v" href="https://www.facebook.com/Chenlongsai4/" target="_blank" rel="noopener">เฉินหลงข้าวต้มเงินล้าน สาย4</a></div>
+          <div class="ci"><span class="k">ที่อยู่</span><span class="v" style="font-weight:500;font-size:16px">180/10 ต.กระทุ่มล้ม อ.สามพราน จ.นครปฐม 73220</span></div>
+        </div>
+        <a class="mapbtn" href="https://www.google.com/maps/search/?api=1&query=13.7384108,100.3290173" target="_blank" rel="noopener"><span>เปิดเส้นทางใน Google Maps</span><span aria-hidden="true">→</span></a>
+        <div class="svc"><span>✓ นั่งทานที่ร้าน</span><span>✓ สั่งกลับบ้าน</span><span>✓ บริการจัดส่ง</span></div>
+      </div>
+      <div class="card">
+        <h3>เวลาเปิด</h3>
+        <div id="hoursList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>เฉินหลง ข้าวต้มเงินล้าน</b><br>พุทธมณฑลสาย 4 · เปิดทุกวัน 16:00–03:00</div>
+    <div>โทร 02-814-3136 · LINE @chenlongsai4</div>
+  </div>
+</footer>
+
+<button class="fab" id="fab" type="button" aria-haspopup="dialog">ใบสั่งอาหาร <span class="n num" id="fabN">0</span> <span class="num" id="fabT">฿0</span></button>
+<div class="scrim" id="scrim" hidden></div>
+<div class="slip" id="slip" role="dialog" aria-modal="true" aria-labelledby="slipTitle" hidden>
+  <div class="slip-h">
+    <div><h3 id="slipTitle">ใบสั่งอาหาร</h3><p>จดไว้ก่อน แล้วยื่นให้พนักงานหรือส่งทาง LINE</p></div>
+    <button class="x" id="slipClose" aria-label="ปิด">×</button>
+  </div>
+  <div class="slip-b" id="slipBody"></div>
+  <div class="slip-f">
+    <div class="tot num"><span>รวม</span><span id="slipTot">฿0</span></div>
+    <div class="split"><label for="ppl">หารกัน</label><span><select id="ppl"></select> คน = <b class="num" id="per">฿0</b> /คน</span></div>
+    <div class="acts"><button id="clear" type="button">ล้างใบสั่ง</button><button class="go" id="copyOrder" type="button">คัดลอกรายการ</button></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+// [ชื่อไทย, English, ราคา, หมายเหตุ?]
+const MENU = [
+  {id:"rice", name:"ข้าวต้ม สั่งปุ๊บได้ปั๊บ", hint:"กับข้าวต้ม พร้อมเสิร์ฟ", groups:[
+    {items:[
+      ["ไข่ตุ๋น","Egg Custard",50],["ต้มจับฉ่าย","Mixed Vegetable Stew",50],["ต้มกาดดอง","Pickled Lettuce Soup",50],
+      ["ตุ๋นมะระ","Braised Bitter Melon",60],["ตุ๋นสามเซียน","Braised Winter Melon",60],["ต้มหน่อไม้จีน","Chinese Bamboo Shoots",60],
+      ["ไส้พะโล้","Braised Pork Intestines",60],["ขาไก่น้ำแดง","Braised Chicken Feet in Red Sauce",60],["ขาไก่ซุปเปอร์","Chicken Feet in Spicy Soup",60],
+      ["น้ำพริกกะปิ","Thai Shrimp Paste Chili Dip",60],["หมูหวาน","Pork Belly in Sweet Sauce",80],["กุ้งหวาน","Boiled Shrimp in Sweet Sauce",100]
+    ]}
+  ]},
+  {id:"one", name:"ข้าวราด / จานเดียว", hint:"เพิ่มไข่ดาว +15 · เพิ่มหมูกรอบ +20", groups:[
+    {sub:"ข้าวผัด", items:[
+      ["ข้าวผัดไข่","Fried Rice",60],["ข้าวผัดหมู","Pork Fried Rice",70],["ข้าวผัดไก่","Chicken Fried Rice",70],
+      ["ข้าวผัดกุ้ง (กุ้ง 2 ตัว)","Shrimp Fried Rice",80],["ข้าวผัดกุ้ง จานใหญ่ (กุ้ง 4 ตัว)","Shrimp Fried Rice, large",150],
+      ["ข้าวผัดปลาหมึก","Squid Fried Rice",80],["ข้าวผัดปลาหมึก จานใหญ่","Squid Fried Rice, large",150],["ข้าวผัดรวมมิตร","Mixed Fried Rice",100]
+    ]},
+    {sub:"ราดข้าว", items:[
+      ["กะเพราหมูสับราดข้าว","Kraprow Minced Pork with Rice",60],["กะเพราไก่ราดข้าว","Kraprow Chicken with Rice",60],
+      ["กะเพราหมูกรอบราดข้าว","Kraprow Pork Belly with Rice",80],["กะเพรากุ้งราดข้าว (กุ้ง 3 ตัว)","Kraprow Shrimp with Rice",80],
+      ["กะเพราปลาหมึกราดข้าว","Kraprow Squid with Rice",80],["ผักบุ้งไฟแดงราดข้าว","Stir-fried Pak Boong with Rice",60],
+      ["คะน้าไฟแดงราดข้าว","Stir-fried Chinese Kale with Rice",60],["แขนงไฟแดงราดข้าว","Stir-fried Chinese Broccoli with Rice",60],
+      ["หมูผัดกระเทียมราดข้าว","Garlic Pork with Rice",80],["ไก่พริกเผาราดข้าว","Chilli Paste Chicken with Rice",60],
+      ["เพิ่มไข่ดาว","Add fried egg",15],["เพิ่มหมูกรอบ","Add crispy pork",20]
+    ]}
+  ]},
+  {id:"yum", name:"ยำ", hint:"ยำแซ่บสไตล์ข้าวต้มโต้รุ่ง", groups:[
+    {sub:"ยำไข่ & ยำเบาๆ", items:[
+      ["ยำไข่เค็ม","Salted Egg Spicy & Sour Salad",50],["ยำไข่แดง","Salted Egg Yolk Salad",50],["ยำไข่เยี่ยวม้า","Century Egg Salad",60],
+      ["ยำไข่ม้า+ไข่เค็ม","Century & Salted Egg Salad",60],["ยำไข่ดาว","Fried Egg Salad",80],["ยำกุ้งแห้ง","Dried Shrimp Salad",80],
+      ["ยำกุนเชียง","Chinese Sausage Salad",80],["ยำผักกาดดอง","Pickled Lettuce Salad",80],["ยำวุ้นเส้นหมูสับ","Glass Noodle Salad w/ Minced Pork",100],
+      ["ยำปลาสลิดทอดกรอบ","Spicy Crispy Gourami Salad",100]
+    ]},
+    {sub:"ยำไข่เค็มซีรีส์", items:[
+      ["ยำกาดดองไข่เค็ม","Pickled Lettuce & Salted Egg Salad",120],["ยำกุนเชียงไข่เค็ม","Chinese Sausage & Salted Egg Salad",120],
+      ["ยำกุ้งแห้งไข่เค็ม","Dried Shrimp & Salted Egg Salad",120],["ยำสลิดไข่เค็ม","Crispy Gourami & Salted Egg Salad",150],
+      ["ยำกุ้งหวานไข่เค็มแซ่บๆ","Sweet Shrimp & Salted Egg Salad",150]
+    ]},
+    {sub:"ยำจานใหญ่", items:[
+      ["ยำไส้อ่อน","Pork Small Intestines Salad",120],["ยำหอยนางรม","Spicy Oyster Salad",120],["หอยนางรมทรงเครื่อง","Fresh Oysters with Thai Condiments",120],
+      ["ยำปลาเค็ม","Fried Salted Mackerel Salad",120],["ยำหมูแผ่น","Crispy Pork Sheets Salad",120],["ยำปลาดุกฟู","Crispy Catfish Flake Salad",120],
+      ["ยำกบทอด","Fried Crispy Frog Salad",120],["ยำกุ้งหวาน","Spicy Sweet Shrimp Salad",120],["ยำคอหมูย่าง (ปลาร้า/น้ำปลา)","Grilled Pork Neck Salad",120],
+      ["ยำหมูกรอบ (ปลาร้า/น้ำปลา)","Spicy Crispy Pork Salad",120],["ยำวุ้นเส้น","Glass Noodle Salad with Seafood",150],["ยำไส้ตัน","Pork Fallopian Tubes Salad",150],
+      ["ยำผักกระเฉด","Deep-Fried Water Mimosa Salad",150],["ยำผักบุ้งกรอบ","Crispy Pak Boong Salad",150],["ยำเห็ดเข็มทอง","Spicy Enoki Mushroom Salad",150],
+      ["ยำสามกรอบ","Sam-Grob Salad",150],["ยำสามทัพ","Three Captain Salad",150],["ยำรวมมิตร","Spicy Mixed Meat Salad",150],
+      ["ยำรวมมิตรทะเล","Spicy Seafood Salad",150],["ยำกุ้งสด","Spicy & Sour Shrimp Salad",150],["ยำหมึกสด","Spicy & Sour Squid Salad",150],
+      ["กุ้งแช่น้ำปลา","Raw Shrimp in Fish Sauce",150],["กุ้งพล่า","Raw Shrimp Salad with Thai Herbs",150]
+    ]}
+  ]},
+  {id:"tum", name:"ส้มตำ & ย่าง", hint:"ปลาร้าหรือน้ำปลา บอกพนักงานได้", groups:[
+    {items:[
+      ["ตำไทย","Papaya Salad",60],["ตำไทยปู","Papaya Salad with Salted Crab",80],["ตำไทยไข่เค็ม","Papaya Salad with Salted Egg",80],
+      ["ตำปูปลาร้า","Papaya Salad with Crab & Fermented Fish",80],["ตำข้าวโพดไข่เค็ม","Corn Salad with Salted Egg",80],["ลาบหมู","Larb Minced Pork",80],
+      ["ตำคอหมูย่าง (ปลาร้า/น้ำปลา)","Grilled Pork Neck Papaya Salad",120],["ยำหมูยอ (ปลาร้า/น้ำปลา)","Vietnamese Pork Sausage Salad",120],
+      ["ตำเส้นเล็กหมูยอ","Rice Noodle Salad with Pork Sausage",150],["ตำเกาเหลาทะเล","Seafood Salad with Fermented Fish Sauce",150],
+      ["คอหมูย่าง","Grilled Pork Neck",100],["ไส้ย่าง","Grilled Pork Intestines",100],["รวมย่าง","Mixed Grilled",120],["น้ำตกคอหมูย่าง","Grilled Pork Neck Nam Tok",120]
+    ]}
+  ]},
+  {id:"soup", name:"ต้ม ยำ ทำ แกง", hint:"ต้มยำเลือกได้ น้ำข้น / น้ำใส · เสิร์ฟหม้อไฟ", groups:[
+    {sub:"ต้มยำหม้อไฟ", items:[
+      ["ต้มยำไก่","Tom-yum Chicken",100],["ต้มยำหมูสับ","Tom-yum Minced Pork",100],["ต้มยำกุ้ง","Tom-yum Shrimp",150],
+      ["ต้มยำปลาหมึก","Tom-yum Squid",150],["ต้มยำกุ้งหมึก","Tom-yum Shrimp & Squid",150],["ต้มยำปลากะพง","Seabass Tom-yum",150],
+      ["ต้มยำปลาช่อน","Snakehead Fish Tom-yum",150],["ต้มยำรวมมิตร","Mixed Tom-yum",150],["ต้มยำรวมทะเล","Seafood Tom-yum",150],
+      ["มาม่าทะเลเดือด","MAMA Tom-yum Seafood",200]
+    ]},
+    {sub:"แกง (แกงส้มใส่ผักรวมกับกระเจด)", items:[
+      ["แกงป่าไก่ / กบ","Spicy Jungle Curry, Chicken or Frog",100],["แกงส้มกุ้งไข่ชะอม","Kaeng Som Shrimp with Acacia Omelet",150],
+      ["แกงส้มปลาช่อน ทอด/ไม่ทอด","Kaeng Som Snakehead Fish",150],["แกงส้มปลากะพง","Kaeng Som Seabass",150]
+    ]}
+  ]},
+  {id:"stir", name:"ผัด & กะเพรา", hint:"", groups:[
+    {sub:"กะเพรา", items:[
+      ["กะเพราหมูสับ","Kra-Prow Minced Pork",80],["กะเพราไก่","Kra-Prow Chicken",80],["หมูชิ้นผัดกะเพรา","Kra-Prow Pork",80],["กะเพรากบ","Kra-Prow Frog",100],
+      ["กะเพราหมูกรอบ","Kra-Prow Crispy Pork Belly",120],["กะเพราไข่เยี่ยวม้า (กรอบ)","Kra-Prow Century Egg",120],["กะเพรารวมมิตร","Kra-Prow Mixed Meat",150],
+      ["กะเพรากุ้ง","Kra-Prow Shrimp",150],["กะเพราปลาหมึก","Kra-Prow Squid",150],["กะเพราไส้อ่อน","Kra-Prow Pork Intestines",150],["กะเพราไส้ตัน","Kra-Prow Pork Fallopian Tubes",150]
+    ]},
+    {sub:"หมู ไก่ กบ", items:[
+      ["วุ้นเส้นผัดไข่","Stir-Fried Glass Noodles with Egg",80],["เกียมฉ่ายผัดไข่","Pickled Cabbage with Egg",80],["หนำเลี้ยบหมูสับ","Minced Pork w/ Nam Liap",80],
+      ["หมูชิ้นผัดเผ็ด","Pork w/ Red Curry Paste",100],["หมูป่าผัดเผ็ด","Pad Phed Wild Boar",100],["เกียมฉ่ายผัดหมูสับ","Pickled Cabbage w/ Minced Pork",100],
+      ["ไก่ผัดผงกะหรี่","Chicken w/ Curry Sauce",100],["ไก่ผัดพริกเผา","Chicken w/ Chilli Paste",100],["ไก่ผัดพริกแกง","Chicken w/ Red Curry Paste",100],
+      ["ไก่ผัดขิง","Chicken w/ Ginger",100],["หมูสับผัดไข่เค็ม","Minced Pork w/ Salted Egg",100],["หมูสับผัดไข่แดง","Minced Pork w/ Salted Egg Yolk",100],
+      ["เต้าหู้ผัดหมูสับ","Minced Pork w/ Tofu",100],["กบผัดเผ็ด","Pad Phed Frogs",100],["กบผัดขี้เมา","Drunken Frogs",100],
+      ["หมูสับผัดปลาเค็ม","Minced Pork w/ Salted Mackerel",120],["หมูกรอบผัดพริกเผา","Crispy Pork Belly w/ Chilli Paste",120],["หมูกรอบผัดเผ็ด","Crispy Pork Belly w/ Red Chilli Paste",120],
+      ["กบคั่วกลิ้ง","Khua Kling Kob",120],["หมูกรอบผัดผงกะหรี่","Crispy Pork Belly w/ Curry Sauce",150],["หมูกรอบคั่วพริกเกลือ","Crispy Pork Belly w/ Chilli & Garlic",150],
+      ["เกียมฉ่ายผัดไส้อ่อน","Pickled Cabbage w/ Pork Intestines",150],["เกียมฉ่ายผัดไส้ตัน","Pickled Cabbage w/ Fallopian Tubes",150],["เต้าหู้ทรงเครื่อง","Egg Tofu w/ Minced Pork & Seafood",150]
+    ]}
+  ]},
+  {id:"sea", name:"ผัดทะเล จัดว่าเด็ด", hint:"ปลาเลือกได้ ทอด / ไม่ทอด", groups:[
+    {sub:"หอย หมึก กุ้ง", items:[
+      ["หอยลายผัดพริกเผา","Clams w/ Chilli Paste",120],["หอยลายผัดฉ่า","Clams w/ Spicy Thai Herbs",120],["หอยลายผัดใบโหระพา","Clams w/ Basil",120],
+      ["ปลาหมึกผัดพริกเผา","Squid w/ Chilli Paste",150],["ปลาหมึกผัดผงกะหรี่","Squid w/ Curry Sauce",150],["ปลาหมึกผัดฉ่า","Squid w/ Spicy Thai Herbs",150],
+      ["ปลาหมึกพริกไทยดำ","Squid w/ Black Pepper",150],["ปลาหมึกผัดไข่เค็ม","Squid w/ Salted Egg",150],["ปลาหมึกผัดไข่แดง","Squid w/ Salted Egg Yolk",150],
+      ["กุ้งผัดพริกเผา","Shrimp w/ Chilli Paste",150],["กุ้งผัดผงกะหรี่","Shrimp w/ Curry Sauce",150],["ฉู่ฉี่กุ้ง","Shrimp w/ Red Curry Sauce",150],
+      ["กุ้งพริกไทยดำ","Shrimp w/ Black Pepper",150],["กุ้งผัดไข่เค็ม","Shrimp w/ Salted Egg",150],["กุ้งผัดไข่แดง","Shrimp w/ Salted Egg Yolk",150],
+      ["กุ้งหมึกผัดผงกะหรี่","Seafood w/ Curry Sauce",150],["ทะเลผัดฉ่า","Seafood w/ Spicy Thai Herbs",150],["กุ้งอบวุ้นเส้น","Baked Glass Noodles with Prawns",150]
+    ]},
+    {sub:"ปลากะพง & ปลาช่อน", items:[
+      ["ปลากะพงผัดคื่นช่าย","Seabass w/ Celery",150],["ปลากะพงผัดเผ็ด","Seabass w/ Red Curry",150],["ปลากะพงผัดฉ่า","Seabass w/ Spicy Thai Herbs",150],
+      ["ปลากะพงพริกไทยดำ","Seabass w/ Black Pepper",150],["ปลาช่อนผัดคื่นช่าย","Snakehead Fish w/ Celery",150],["ปลาช่อนผัดเผ็ด","Snakehead Fish w/ Red Curry",150],
+      ["ปลาช่อนผัดฉ่า","Snakehead Fish w/ Spicy Herbs",150],["ปลาช่อนพริกไทยดำ","Snakehead Fish w/ Black Pepper",150],
+      ["รวมมิตรผัดพริกเผา","Mixed Meat w/ Chilli Paste",180],["รวมมิตรผัดเผ็ด","Mixed Meat Pad Phed",180]
+    ]},
+    {sub:"ปลาเป็นตัว", items:[
+      ["ปลากะพงทั้งตัว","Whole Seabass, choose style",350],["ปลาทับทิมทั้งตัว","Whole Red Tilapia, choose style",350]
+    ]}
+  ]},
+  {id:"veg", name:"ผัดผัก", hint:"ผัดผักทุกจานไม่ใส่พริกสด มีพริกจากน้ำพริกเผาเท่านั้น ต้องการเผ็ดโปรดระบุ", groups:[
+    {items:[
+      ["ผักบุ้งไฟแดง","Pad Pak Boong Fai Daeng",60],["คะน้าไฟแดง","Chinese Kale Fai Daeng",60],["แขนงไฟแดง","Baby Chinese Broccoli",60],
+      ["ยอดมะระไฟแดง","Chayote Shoots Fai Daeng",60],["มะระผัดไข่","Bitter Melon with Egg",60],["ถั่วงอกเต้าหู้","Bean Sprouts w/ Tofu",60],
+      ["กะหล่ำน้ำปลา","Cabbage with Fish Sauce",60],["ผักกาดขาวน้ำมันหอย","Chinese Cabbage w/ Oyster Sauce",60],["เห็ดเข็มทองน้ำมันหอย","Enoki Mushroom w/ Oyster Sauce",60],
+      ["ผักบุ้งไฟแดงหมูกรอบ","Pak Boong w/ Crispy Pork",80],["คะน้าหมูกรอบ","Chinese Kale w/ Crispy Pork",80],["แขนงหมูกรอบ","Baby Broccoli w/ Crispy Pork",80],
+      ["ยอดมะระหมูกรอบ","Chayote Shoots w/ Crispy Pork",80],["ไชโป๊ผัดไข่","Sweet Turnip with Egg",80],["ถั่วงอกเต้าหู้หมูสับ","Bean Sprouts, Tofu & Minced Pork",80],
+      ["ถั่วงอกเต้าหู้หมูกรอบ","Bean Sprouts, Tofu & Crispy Pork",80],["กะหล่ำหมูสับ / หมูกรอบ","Cabbage w/ Minced or Crispy Pork",80],["เห็ดเข็มทองหมูกรอบ","Enoki w/ Crispy Pork",80],
+      ["ผักบุ้งปลาเค็ม","Pak Boong w/ Salted Mackerel",100],["คะน้าปลาเค็ม","Chinese Kale w/ Salted Mackerel",100],["แขนงปลาเค็ม","Baby Broccoli w/ Salted Mackerel",100],
+      ["ยอดมะระปลาเค็ม","Chayote Shoots w/ Salted Mackerel",100],["กระเฉดไฟแดง","Water Mimosa Fai Daeng",100],["กระเฉดหมูกรอบ","Water Mimosa w/ Crispy Pork",120],
+      ["กระเฉดปลาเค็ม","Water Mimosa w/ Salted Mackerel",120],["คุยช่ายขาวผัดเต้าหู้","White Garlic Chives with Tofu",120],
+      ["คุยช่ายเต้าหู้หมูสับ","Garlic Chives, Tofu & Minced Pork",150],["คุยช่ายเต้าหู้หมูกรอบ","Garlic Chives, Tofu & Crispy Pork",150]
+    ]}
+  ]},
+  {id:"fry", name:"ทอด & ของแห้ง", hint:"เมนูเด็กอ้วน กับแกล้มชั้นดี", groups:[
+    {sub:"ทอดกรอบ", items:[
+      ["ปลาทูทอด","Deep-Fried Mackerel",60],["ไก่ทอดเกลือ","Salt-Fried Chicken",80],["หมูแดดเดียว","Sun-Dried Pork",80],["สามชั้นทอดน้ำปลา","Fried Pork Belly with Fish Sauce",80],
+      ["หมูกรอบทอด","Crispy Pork Belly",100],["ไก่ทอดกระเทียม","Garlic Fried Chicken",100],["กบทอดกระเทียม","Garlic Fried Frog",100],["เนื้อแดดเดียว","Sun-Dried Beef",100],
+      ["ไก่เม็ดมะม่วง","Chicken w/ Cashew Nuts",120],["ปีกไก่ทอด","Fried Chicken Wings",120],["ไส้พะโล้ทอด","Fried Braised Pork Intestines",120],
+      ["ไส้อ่อนทอดกระเทียม","Garlic Fried Small Intestines",120],["หมูกรอบทอดกระเทียม","Garlic Fried Crispy Pork",120],["สามชั้นทอดพริกขี้หนูสวน","Fried Chilli Pork Belly",120],
+      ["ไส้ตันทอดกระเทียม","Garlic Fried Fallopian Tubes",150],["กุ้ง / หมึกทอดกระเทียม","Garlic Fried Shrimp or Squid",150],["กุ้งชุบแป้งทอด","Crispy Batter-Fried Shrimp",150],
+      ["ปลาหมึกชุบแป้งทอด","Crispy Batter-Fried Squid",150],["ออส่วนหอยนางรม","Gooey Oyster Omelet",150],["ออส่วนกระทะร้อน","Soft Oyster Omelet on Hot Pan",150]
+    ]},
+    {sub:"ของแห้งทอดกรุบกรอบ", items:[
+      ["กุนเชียงทอด","Deep-Fried Chinese Sausage",60],["ปลาสลิดทอด","Deep-Fried Gourami",80],["หมูแผ่นทอด","Deep-Fried Pork Slice",80],["ปลาหวานทอด","Deep-Fried Sweet Catfish",80],
+      ["ปลาหมึกแห้งทอด","Deep-Fried Sun-Dried Squid",80],["กุ้งแห้งทอด","Deep-Fried Sun-Dried Shrimp",80],["ปลาซิวทอด","Deep-Fried Sun-Dried Siw Fish",80],
+      ["เม็ดมะม่วงทอด","Deep-Fried Cashew Nuts",80],["ปลาเค็มทอด","Deep-Fried Salted Mackerel",100],["ปลาวงทอด","Deep-Fried Ring Fish",100],["ปลากล้วยทอด","Deep-Fried Horseface Fish",100]
+    ]}
+  ]},
+  {id:"drink", name:"เครื่องดื่ม & ของหวาน", hint:"", groups:[
+    {sub:"เครื่องดื่ม", items:[
+      ["น้ำเปล่า","Still Water",10],["น้ำแข็ง","Ice Bucket",10],["โซดา","Soda",20],["เป๊ปซี่ (เล็ก)","Pepsi, small",20],["เป๊ปซี่ (ใหญ่)","Pepsi, large",30],
+      ["เบียร์ช้าง","Chang Beer",80],["เบียร์ลีโอ","Leo Beer",80],["เบียร์สิงห์","Singha Beer",100],["เบียร์ไฮนีเก้น","Heineken Beer",100],
+      ["เบียร์สดตะวันแดง แก้ว 0.3 ล.","Tawandang draft, glass",79],["เบียร์สดตะวันแดง เหยือก 1 ล.","Tawandang draft, pitcher",199],["เบียร์สดตะวันแดง ทาวเวอร์ 3 ล.","Tawandang draft, tower",599],
+      ["หงส์ทอง","Hong Thong",160],["แสงโสม","SangSom",180],["รีเจนซี่","Regency",450]
+    ]},
+    {sub:"ของหวาน", items:[
+      ["น้ำแข็งใส 3 อย่าง","Shaved Ice, 3 toppings",35],["ไอติมไผ่ทอง","Phai Thong Ice Cream",35],["น้ำแข็งใส 4 อย่าง","Shaved Ice, 4 toppings",40],
+      ["ปังเย็นนมชมพู","Iced Bread with Pink Milk",40],["น้ำแข็งใสรวมมิตร","Shaved Ice, mixed",50]
+    ]}
+  ]}
+];
+
+const MUST = [
+  ["ไส้พะโล้ทอด","Fried Braised Pork Intestines",120,"พะ"],
+  ["ต้มยำทะเลน้ำข้น","Seafood Tom-yum, creamy",150,"ต้ม"],
+  ["ออส่วนหอยนางรม","Gooey Oyster Omelet",150,"หอย"],
+  ["คุยช่ายขาวผัดเต้าหู้","White Garlic Chives with Tofu",120,"ผัด"],
+  ["หอยลายผัดพริกเผา","Clams w/ Chilli Paste",120,"หอย"],
+  ["ขาหมูพะโล้ต้มถั่ว","Braised Pork Leg with Peanuts",150,"ขา"],
+  ["ยำปลาสลิดทอดกรอบ","Spicy Crispy Gourami Salad",100,"ยำ"],
+  ["กะเพราไข่เยี่ยวม้า (กรอบ)","Kra-Prow Century Egg",120,"กะ"],
+  ["กุ้งอบวุ้นเส้น","Baked Glass Noodles with Prawns",150,"กุ้ง"],
+  ["มาม่าทะเลเดือด","MAMA Tom-yum Seafood",200,"ซด"]
+];
+
+const $ = s => document.querySelector(s);
+const baht = n => "฿" + n.toLocaleString("th-TH");
+const order = new Map(); // key -> {th, price, qty}
+let activeCat = "all", query = "";
+
+// --- open/closed, Bangkok time ---
+const DAYS = ["วันอาทิตย์","วันจันทร์","วันอังคาร","วันพุธ","วันพฤหัสบดี","วันศุกร์","วันเสาร์"];
+function bkkNow(){
+  const p = new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Bangkok",hour:"2-digit",minute:"2-digit",weekday:"short",hour12:false}).formatToParts(new Date());
+  const get = t => p.find(x => x.type === t).value;
+  const wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday"));
+  return {h:+get("hour") % 24, m:+get("minute"), wd};
+}
+function tickStatus(){
+  const {h,m,wd} = bkkNow();
+  const mins = h*60 + m;
+  const open = mins >= 960 || mins < 180;
+  const st = $("#status");
+  st.classList.toggle("closed", !open);
+  let line;
+  if (open){
+    const since = mins >= 960 ? mins - 960 : mins + 480; // minutes since 16:00
+    const left = 660 - since;
+    $("#bar").style.width = (since / 660 * 100).toFixed(1) + "%";
+    line = `เปิดอยู่ตอนนี้ · อีก ${Math.floor(left/60)} ชม. ${left%60} นาทีปิดร้าน`;
+    st.lastElementChild.textContent = "เปิดอยู่ · ถึงตี 3";
+  } else {
+    const until = 960 - mins;
+    $("#bar").style.width = "0";
+    line = `ตอนนี้ปิดอยู่ · เปิดอีก ${Math.floor(until/60)} ชม. ${until%60} นาที`;
+    st.lastElementChild.textContent = "ปิดอยู่ · เปิด 4 โมงเย็น";
+  }
+  $("#nowline").textContent = line;
+  // service day: before 03:00 still counts as previous day
+  const today = mins < 180 ? (wd + 6) % 7 : wd;
+  $("#hoursList").innerHTML = [1,2,3,4,5,6,0].map(d =>
+    `<div class="row num${d===today?" today":""}"><span>${DAYS[d]}${d===today?" (วันนี้)":""}</span><span>16:00 – 03:00</span></div>`).join("");
+}
+tickStatus(); setInterval(tickStatus, 30000);
+
+// --- must try ---
+$("#mustGrid").innerHTML = MUST.map(([th,en,p,g]) => `
+  <article class="dish">
+    <span class="stamp num">${p}.-</span>
+    <span class="glyph" aria-hidden="true">${g}</span>
+    <h3>${th}</h3><p>${en}</p>
+    <button class="add" type="button" data-th="${th}" data-p="${p}">+ ใส่ใบสั่ง</button>
+  </article>`).join("");
+
+// --- menu board ---
+const total = MENU.reduce((n,c) => n + c.groups.reduce((a,g) => a + g.items.length, 0), 0);
+$("#tabs").innerHTML = `<button class="tab" data-cat="all" aria-pressed="true">ทั้งหมด</button>` +
+  MENU.map(c => `<button class="tab" data-cat="${c.id}" aria-pressed="false">${c.name}</button>`).join("");
+
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const hl = s => { if(!query) return esc(s); const i = s.toLowerCase().indexOf(query.toLowerCase()); if(i<0) return esc(s);
+  return esc(s.slice(0,i)) + "<mark>" + esc(s.slice(i,i+query.length)) + "</mark>" + esc(s.slice(i+query.length)); };
+
+function renderBoard(){
+  let shown = 0;
+  const html = MENU.filter(c => activeCat === "all" || c.id === activeCat).map(c => {
+    const groups = c.groups.map(g => {
+      const items = g.items.filter(([th,en]) => !query || th.includes(query) || en.toLowerCase().includes(query.toLowerCase()));
+      if (!items.length) return "";
+      shown += items.length;
+      return (g.sub ? `<div class="sub">${g.sub}</div>` : "") + `<div class="items">` + items.map(([th,en,p]) => {
+        const q = order.get(th)?.qty;
+        return `<div class="item"><div class="nm"><div class="th">${hl(th)}</div><div class="en">${hl(en)}</div></div>
+          <div class="pr num">${p}</div>
+          <button class="plus" type="button" data-th="${esc(th)}" data-p="${p}" aria-label="เพิ่ม ${esc(th)}">+${q?`<span class="q num">${q}</span>`:""}</button></div>`;
+      }).join("") + `</div>`;
+    }).join("");
+    if (!groups) return "";
+    return `<div class="cat" id="cat-${c.id}"><h3>${c.name}${c.hint ? "" : ""}</h3>${c.hint ? `<p class="note">${c.hint}</p>` : ""}${groups}</div>`;
+  }).join("");
+  $("#board").innerHTML = html || `<div class="empty">ไม่พบเมนู “${esc(query)}” ลองพิมพ์คำอื่น หรือถามพนักงานได้เลย</div>`;
+  $("#count").textContent = query || activeCat !== "all" ? `${shown} รายการ` : `${total} รายการ`;
+}
+renderBoard();
+
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if (!b) return;
+  activeCat = b.dataset.cat;
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", t === b));
+  renderBoard();
+  $("#menu").scrollIntoView({behavior:"smooth"});
+});
+$("#q").addEventListener("input", e => { query = e.target.value.trim(); renderBoard(); });
+
+// --- order slip ---
+const ppl = $("#ppl");
+for (let i = 1; i <= 12; i++) ppl.insertAdjacentHTML("beforeend", `<option value="${i}">${i}</option>`);
+ppl.value = "2";
+
+function add(th, p, d = 1){
+  const cur = order.get(th) || {th, price:+p, qty:0};
+  cur.qty += d;
+  if (cur.qty <= 0) order.delete(th); else order.set(th, cur);
+  syncOrder();
+}
+function syncOrder(){
+  let n = 0, t = 0;
+  order.forEach(o => { n += o.qty; t += o.qty * o.price; });
+  $("#fabN").textContent = n; $("#fabT").textContent = baht(t);
+  $("#slipTot").textContent = baht(t);
+  $("#per").textContent = baht(Math.ceil(t / +ppl.value));
+  $("#slipBody").innerHTML = n ? [...order.values()].map(o => `
+    <div class="ln"><span class="t">${esc(o.th)}</span>
+      <span class="qty num"><button type="button" data-d="-1" data-th="${esc(o.th)}" aria-label="ลด">−</button>${o.qty}<button type="button" data-d="1" data-th="${esc(o.th)}" aria-label="เพิ่ม">+</button></span>
+      <span class="num">${o.qty*o.price}</span></div>`).join("")
+    : `<div class="slip-empty">ยังไม่มีรายการ<br>กดปุ่ม + ข้างชื่อเมนูเพื่อจดไว้</div>`;
+  renderBoard();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".plus, .add");
+  if (!b) return;
+  add(b.dataset.th, b.dataset.p);
+  const f = $("#fab"); f.classList.add("bump"); setTimeout(() => f.classList.remove("bump"), 180);
+  toast(`ใส่ ${b.dataset.th} ในใบสั่งแล้ว`);
+});
+$("#slipBody").addEventListener("click", e => {
+  const b = e.target.closest("button[data-d]"); if (!b) return;
+  const o = order.get(b.dataset.th); add(o.th, o.price, +b.dataset.d);
+});
+ppl.addEventListener("change", syncOrder);
+
+const openSlip = v => { $("#slip").hidden = !v; $("#scrim").hidden = !v; if (v) $("#slipClose").focus(); };
+$("#fab").addEventListener("click", () => openSlip(true));
+$("#slipClose").addEventListener("click", () => openSlip(false));
+$("#scrim").addEventListener("click", () => openSlip(false));
+document.addEventListener("keydown", e => { if (e.key === "Escape") openSlip(false); });
+$("#clear").addEventListener("click", () => { order.clear(); syncOrder(); toast("ล้างใบสั่งแล้ว"); });
+
+async function copyText(text, done){
+  try { await navigator.clipboard.writeText(text); toast(done); }
+  catch { toast("คัดลอกไม่ได้ ลองเลือกข้อความเองนะ"); }
+}
+$("#copyOrder").addEventListener("click", () => {
+  if (!order.size) return toast("ใบสั่งยังว่างอยู่");
+  let t = 0;
+  const lines = [...order.values()].map(o => { t += o.qty*o.price; return `• ${o.th} x${o.qty} = ${o.qty*o.price}`; });
+  copyText(`สั่งอาหาร เฉินหลง ข้าวต้มเงินล้าน สาย4\n${lines.join("\n")}\nรวม ${t} บาท`, "คัดลอกรายการแล้ว วางในแชท LINE ได้เลย");
+});
+document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", () => copyText(b.dataset.copy, `คัดลอก ${b.dataset.copy} แล้ว`)));
+
+let tt;
+function toast(msg){ const el = $("#toast"); el.textContent = msg; el.hidden = false; clearTimeout(tt); tt = setTimeout(() => el.hidden = true, 1800); }
+syncOrder();
+</script>
+</body>
+</html>
